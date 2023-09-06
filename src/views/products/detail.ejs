@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include("./../partials/head.ejs", {title: "Datail"}) %> 
+
+<body class="grid-container">
+    
+    <%-include("./../partials/header.ejs") %> 
+
+    <main class="container-detail">
+
+      
+        <section class="caja-detail" >
+           
+            <div>
+            <img class="imagen-detail"  src="<%= producto.image %> " alt=""   >
+            </div>
+            <div>
+            <p class="bold">PRECIO: $ <%= producto.precio %></p>
+            <p class="verde"> DESCUENTO: <%= producto.descuento %> %</p>
+            <p class="verde"> PRECIO FINAL: $ <%=((100-producto.descuento)/100)*(producto.precio)%> </p>
+            <p class="gris"><%= producto.nombre %></p>
+            </div>
+           
+        </section>
+   
+
+    </main>
+
+        
+    <%-include("./../partials/footer.ejs") %> 
+
+</body>
+</html>
