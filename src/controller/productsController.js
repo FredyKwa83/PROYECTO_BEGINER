@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const productosPath = path.join(__dirname, "../data/productos.json");
-const  productos = JSON.parse(fs.readFileSync(productosPath, 'utf-8'));
+const productosFilePath = path.join(__dirname, "../data/productos.json");
+const productos = JSON.parse(fs.readFileSync(productosFilePath, 'utf-8'));
 
 
 // const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -41,24 +41,19 @@ const productsController = {
         
     },
 
-    postEdit: (req, res) => {
-        let id = req.params.id;
-        l = productos.find(producto => producto.id == id);
+    putEdit: (req, res) => {
+        let idBody = req.params.idBody;
+        let productoEditado;
         
-        if (l){
-            l.nombre = req.body.titulo;
-            l.precio = req.body.precio;
-            l.descuento = req.body.descuento;
-                       
-        } 
+        for (let obj of productos){
+            if(obj.id == idBody){
+                productoEditado = obj;
+                break;
+            }
+        }
 
-        fs.writeFileSync(productosPath, JSON.stringify(productos, null, ' '));
-
-        res.redirect ('/')
-    
+        res.render('edit', {productoEditado})
     },
-
-
 
     products: (req, res) => {
         res.render('./products/products');
@@ -68,8 +63,61 @@ const productsController = {
         res.render('./products/createProduct');
     },
 
-    putCreateProduct: (req, res) => {
-        res.render('./products/createProduct');
+    postCreateProduct: (req, res) => {
+
+            // PREGUNTAR SI AQUI VA ESTE CODIGO PARA VALIDAR LA SUBIDA DE IMAGENES
+            
+            // const file = req.file
+            // if (!file) {
+            // const error = new Error('Por favor seleccione un archivo')
+            // error.httpStatusCode = 400
+            // return next(error)
+            // }
+            // res.send(file)
+
+       
+        let datosFormulario = req.body;
+		let idProductoNuevo = (productos[productos.length-1].id)+1; // obtener un id (acordate por que +1)
+		// console.log(idNuevoLibro); // verificar antes de continuar
+
+        let nombreImagen = req.file.filename;
+        console.log(nombreImagen)
+
+		let objNuevoProducto = {
+			id: idProductoNuevo,
+			nombre: datosFormulario.nombre,
+			precio: parseInt(datosFormulario.precio),
+			descuento: parseInt(datosFormulario.descuento),
+			image: nombreImagen, 
+		}
+
+		productos.push(objNuevoProducto);
+
+		fs.writeFileSync(productosFilePath, JSON.stringify(productos,null,' '));
+
+		res.redirect('/'); // manda el producto al index
+    },
+
+    destroy: (req, res) => {
+        
+        let id = req.params.id;
+        let productoEncontrado;
+        
+        let numeroProducto = productos.filter(function(e){
+            return id!=e.id;
+        })
+
+        for (let product of productos){
+            if (product.id == id){
+                productoEncontrado=product;
+            }
+        }
+
+        fs.unlinkSync(path.join(__dirname, "../../public/img/imagen_llegada/", productoEncontrado.image))
+
+        fs.writeFileSync(productosFilePath, JSON.stringify(numeroProducto,null,' '));
+
+		res.redirect('/');
     }
 
 

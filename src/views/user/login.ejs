@@ -8,17 +8,40 @@
         <header>
             <%- include('./../partials/header') %>
         </header>
-        
-   <h1 class = "titulo-h1-createProducts"> AQUI ES EL LOGIN </h1> 
+            
+<main class="main-edit"> 
+   <form action="/user/login" method="POST" id="login">
+    <legend class="main-titulo-login">Login</legend>
+    <div class="form-prg">
+        <h4 class="login-h4">Nombre de usuario</h4>
+        <input type="text" id="user" name="usernameLogin" placeholder="" class="form-control">
+    </div>
+    <% if (locals.errors && errors.usernameLogin) { %>
+        <div>
+            <p style="color: red;"><%= errors.usernameLogin.msg %></p>
+        </div>
+    <% } %>
+    <div class="form-prg">
+        <h4 class="login-h4">Contraseña</h4>
+        <input type="password" id="password" name="passwordLogin" placeholder="" class="form-control">
+    </div>
+    <% if (locals.errors && errors.passwordLogin) { %>
+        <div>
+            <p style="color: red;"><%= errors.passwordLogin.msg %></p>
+        </div>
+    <% } %>
+    <div class="olvide-contraseña">
+        <a href="#">Olvide mi contraseña</a>
+    </div>
 
-        <main class="main-edit">
-           
-        </main>
-        
+    <div class="smbt mb-3 submit-edit">
+        <input type="submit" value="Ingresar" class="btn btn-primary">
+    </div>
+</form>
+</main>
+      
             <%- include('./../partials/footer') %>     
     </body>
     </html>
 
 
-</body>
-</html>

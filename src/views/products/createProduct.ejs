@@ -8,13 +8,38 @@
         <header>
             <%- include('./../partials/header') %>
         </header>
-        
-   <h1 class = "titulo-h1-createProducts"> AQUI CREAMOS LOS PR0DUCTOS </h1> 
-
+             
         <main class="main-edit">
-           
+            <form action="/createProduct" method="POST" enctype="multipart/form-data">
+                <legend class="main-titulo-edit">Formulario de Creacion de producto</legend>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre del producto:</label>
+                    <input type="text" id="name" name="nombre" class="form-control"  placeholder="Nombre del producto" >
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio del producto:</label>
+                    <input type="text" id="price" name="precio" class="form-control" placeholder="Precio del producto">
+                </div>
+
+                <div class="mb-3">
+                    <label for="discount" class="form-label">Descuento:</label>
+                    <input type="text" id="discount" name="descuento" class="form-control" placeholder="Descuento">
+                </div>
+                
+                <div class="mb-3 imagen-edit">
+                    <label for="image"> Seleccionar Imagen </label>
+                    <input type="file" name="image" />
+                </div>
+                <div class="mb-3 submit-edit">
+                    <button type="submit" class="btn btn-primary"> Guardar Producto </button>
+                </div>
+                
+                
+              </form>
+               
         </main>
-        
+
             <%- include('./../partials/footer') %>     
     </body>
     </html>

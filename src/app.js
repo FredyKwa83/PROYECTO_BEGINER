@@ -2,10 +2,21 @@ const express = require("express");
 const app = express();
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../public/")));
 
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "/views"))
+
+// PARA ENVIAR INFORMACION POR POST
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); 
+
+// para poder sobreescribir el método original y poder implementar los 
+//métodos PUT o DELETE
+
+const methodOverride = require('method-override');
+app.use(methodOverride('_method')); 
 
 
 // SE CREO PARA VISTAS DE PRODUCTOS
@@ -38,6 +49,19 @@ app.use("/user", userRouter);
 // app.use("/registro", registroRouter);
 
 
+//ESTE MILDWARE HAY QUE PONERLO AL FINAL
+
+app.use((req, res, next) => {
+    res.status(404).render('error')
+    
+    // .send(`
+    // <div style= "text-align:center; padding-top:30px"> 
+    // <h1 style= "font-size: 80px" > Error 404 </h1>
+    // <img style="width:30%" src="https://www.psicologo-palma-de-mallorca.es/coste-psicologico-nunca-decir-no.jpg" 
+    // </div>
+    // `);
+   })
+   
 
 app.listen(3004, () => {
     console.log("servidor corriendo")

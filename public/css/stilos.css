@@ -145,12 +145,24 @@ body{
 
     .titulo-h1-createProducts{
         font-size: 6vw;
-        text-align: center;
+        text-align:center;
         font-weight: 4vw;
-        padding-top: 6vw;
-        padding-bottom: 40vw;
+        padding-top: 3vw;
+        padding-bottom: 4vw;
     }
 
+    .titulo-formulario-creacion{
+        text-align:center;
+        font-weight: 4vw;
+        padding-top: 10vw;
+        
+    }
+
+    .formulario-createProduct{
+        text-align:center;
+        font-weight: 4vw;
+        padding-bottom: -20vw;
+    }
     .main-edit{
         font-size: 5vw;
         text-align:left;
@@ -168,6 +180,13 @@ body{
         padding-bottom: 5vw;
     }
 
+    .main-titulo-login{
+        padding-top: 6vw;
+        font-size: 6vw;
+        text-align:center;
+        padding-bottom: 7vw;
+    }
+
     .imagen-edit{
         padding-top: 3vw;
         font-size: 3vw;
@@ -180,6 +199,21 @@ body{
         text-align:center;
     }
 
+    .olvide-contraseña a{
+        text-align: center;
+        text-decoration:none;
+    }
+
+    .olvide-contraseña {
+        padding-top: 3vw;
+        text-align: center;
+        font-size: 4vw;
+    }
+
+    .login-h4{
+        font-size: 4vw;
+    }
+    
      /* -------- footer 768px-------- */
      .footer-detail{
         margin-top: 20vw;
