@@ -42,17 +42,25 @@ const productsController = {
     },
 
     putEdit: (req, res) => {
-        let idBody = req.params.idBody;
-        let productoEditado;
-        
-        for (let obj of productos){
-            if(obj.id == idBody){
-                productoEditado = obj;
-                break;
-            }
-        }
 
-        res.render('edit', {productoEditado})
+        let nombreImagen = req.file.filename;
+    
+        let id = req.params.id;
+		
+		for (let s of productos){
+			if (id==s.id){
+				s.nombre= req.body.nombre;
+				s.precio= req.body.precio;
+				s.descuento= req.body.descuento;
+                s.image= nombreImagen;
+				break;
+			}
+		}
+
+		fs.writeFileSync(productosFilePath, JSON.stringify(productos,null,' '));
+
+		res.redirect('/');
+       
     },
 
     products: (req, res) => {
@@ -65,21 +73,9 @@ const productsController = {
 
     postCreateProduct: (req, res) => {
 
-            // PREGUNTAR SI AQUI VA ESTE CODIGO PARA VALIDAR LA SUBIDA DE IMAGENES
-            
-            // const file = req.file
-            // if (!file) {
-            // const error = new Error('Por favor seleccione un archivo')
-            // error.httpStatusCode = 400
-            // return next(error)
-            // }
-            // res.send(file)
-
-       
         let datosFormulario = req.body;
 		let idProductoNuevo = (productos[productos.length-1].id)+1; // obtener un id (acordate por que +1)
-		// console.log(idNuevoLibro); // verificar antes de continuar
-
+		
         let nombreImagen = req.file.filename;
         console.log(nombreImagen)
 
@@ -94,31 +90,46 @@ const productsController = {
 		productos.push(objNuevoProducto);
 
 		fs.writeFileSync(productosFilePath, JSON.stringify(productos,null,' '));
-
+        
 		res.redirect('/'); // manda el producto al index
     },
 
-    destroy: (req, res) => {
+    
+    getDestroy: (req, res) => {
+
+        let id = req.params.id;
+
+        const producto = productos.find(producto => producto.id == id);
+    
+        if (producto){
+            res.render('./products/deleteProduct', {producto});
+        }
+        
+    },
+
+
+    deleteDestroy: (req, res) => {
         
         let id = req.params.id;
-        let productoEncontrado;
+        let productoParaEliminar;
         
-        let numeroProducto = productos.filter(function(e){
-            return id!=e.id;
+        let productosNoEliminados = productos.filter(function(e){
+            return id!= e.id;
         })
 
         for (let product of productos){
             if (product.id == id){
-                productoEncontrado=product;
+                productoParaEliminar = product;
             }
         }
 
-        fs.unlinkSync(path.join(__dirname, "../../public/img/imagen_llegada/", productoEncontrado.image))
+    fs.unlinkSync(path.join(__dirname, "../../public/img/imagen_llegada/", productoParaEliminar.image))
 
-        fs.writeFileSync(productosFilePath, JSON.stringify(numeroProducto,null,' '));
+    fs.writeFileSync(productosFilePath, JSON.stringify(productosNoEliminados,null,' '));
 
-		res.redirect('/');
-    }
+	res.redirect('/');
+
+}
 
 
 };

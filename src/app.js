@@ -24,43 +24,16 @@ app.use(methodOverride('_method'));
 const indexRouter = require("./routes/productsRoutes")
 app.use("/", indexRouter)
 
-// const detailRouter = require("./routes/productsRoutes")
-// app.use("/detail", detailRouter)
-
-// const editProductRouter = require("./routes/productsRoutes")
-// app.use("/editProduct", editProductRouter)
-
-// const productsRouter = require("./routes/productsRoutes")
-// app.use("/products", productsRouter)
-
-// const createProductsRouter = require("./routes/productsRoutes")
-// app.use("/createProduct", createProductsRouter)
-
-
 // SE CREO PARA VISTAS DE USUARIOS
 
 const userRouter = require("./routes/userRoutes");
 app.use("/user", userRouter);
 
-// const perfilRouter = require("./routes/userRoutes");
-// app.use("/perfil", perfilRouter);
-
-// const registroRouter = require("./routes/userRoutes");
-// app.use("/registro", registroRouter);
-
-
 //ESTE MILDWARE HAY QUE PONERLO AL FINAL
 
 app.use((req, res, next) => {
     res.status(404).render('error')
-    
-    // .send(`
-    // <div style= "text-align:center; padding-top:30px"> 
-    // <h1 style= "font-size: 80px" > Error 404 </h1>
-    // <img style="width:30%" src="https://www.psicologo-palma-de-mallorca.es/coste-psicologico-nunca-decir-no.jpg" 
-    // </div>
-    // `);
-   })
+})
    
 
 app.listen(3004, () => {

@@ -12,15 +12,20 @@
         <section class="caja" >
            
             <div>
-            <img class="producto imagen1" src="/img/imagen_llegada/<%= producto.image %> " alt=""   >
+                <a class="ancla-index" href="/detail/<%= producto.id %>">
+                    <img class="producto imagen1" src="/img/imagen_llegada/<%= producto.image %> " alt="">
+
+                    <div>
+                        <p class="bold">PRECIO: $ <%= producto.precio %></p>
+                        <p class="verde"> DESCUENTO: <%= producto.descuento %> %</p>
+                        <p class="verde"> PRECIO FINAL: $ <%=((100-producto.descuento)/100)*(producto.precio)%> </p>
+                        <p class="gris"><%= producto.nombre %></p>
+                    
+                    </div>
+                </a>
+           
             </div>
-            <div>
-                <p class="bold">PRECIO: $ <%= producto.precio %></p>
-                <p class="verde"> DESCUENTO: <%= producto.descuento %> %</p>
-                <p class="verde"> PRECIO FINAL: $ <%=((100-producto.descuento)/100)*(producto.precio)%> </p>
-                <p class="gris"><%= producto.nombre %></p>
             
-            </div>
            
         </section>
      <% }) %>

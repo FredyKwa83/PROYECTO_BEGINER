@@ -213,6 +213,11 @@ body{
     .login-h4{
         font-size: 4vw;
     }
+
+    .ancla-index{
+        text-decoration: none;
+        color:black
+    }
     
      /* -------- footer 768px-------- */
      .footer-detail{
