@@ -1,98 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<%-include("./../partials/head.ejs", {title: "Registro"}) %> 
+<%-include("./../partials/head.ejs", {title: "Registro" }) %>
 
-   
+
     <body class="fondo">
         <header>
             <%- include('./../partials/header') %>
         </header>
-    <main class="main-edit">   
-        <div class="formulario-principal">
-           
-            <form action="/user/registro" method="POST" class="register">
-                <legend class="main-titulo-edit">Registro de Usuario</legend>
-        
-                <label class="form-label" for="nombre"></label>
-                <input 
-                type="text" placeholder="Nombre" 
-                name="nombre" class="form-control
-                <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.nombre : null %>">
-                <br>
-                <% if (locals.errors && errors.nombre) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.nombre.msg %></p>
-                    </div>
-                <% } %>
-                
-        
-                <label class="form-label" for="Apellido"></label>
-                <input type="text" placeholder="Apellido" 
-                name="Apellido" 
-                class="form-control 
-                <%= locals.errors && errors.Apellido ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.Apellido : null %>"> 
-                <br>
-                <% if (locals.errors && errors.Apellido) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.Apellido.msg %></p>
-                    </div>
-                <% } %>
-        
-                <label class="form-label" for="username"></label>
-                <!-- <div class="error" id="username-error"></div> -->
-                <input type="text" placeholder="Nombre de usuari@" 
-                name="username" 
-                class="form-control <%= locals.errors && errors.username ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.username : null %>">  <br>
-                <% if (locals.errors && errors.username) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.username.msg %></p>
-                    </div>
-                <% } %>
-                <label class="form-label" for="email"></label>
-                <input type="email" placeholder="email" 
-                name="email" 
-                class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.email : null %>"> 
-                <br>
-                <% if (locals.errors && errors.email) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.email.msg %></p>
-                    </div>
-                <% } %>        
+        <main class="main-edit">
+            <div class="formulario-principal">
 
-                <label class="form-label" for="fecha-nacimiento"></label>
-                <input type="date" placeholder="Fecha de Nacimiento" 
-                name="fecha" 
-                class="form-control <%= locals.errors && errors.fecha ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.fecha : null %>"> 
-                <br>
-                <% if (locals.errors && errors.fecha) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.fecha.msg %></p>
-                    </div>
-                <% } %>     
-                
-                <label class="form-label" for="pais"> </label>
-                <select 
-                    name="pais" 
-                    class="form-control <%= locals.errors && errors.pais ? 'is-invalid' : null %>"
-                    id="">
-                    <option value="">elege un pais</option>
-                    <% 
-                        let paises = [ "Colombia", "Ecuador", "Chile", "Peru", "Venezula","Brasil", "Argentina", "Mexico","Bolivia","otro"]
-                    %>
-                    <% for (const onePais of paises) { %> 
-                        <option value="<%= onePais %>" 
-                        <%= locals.oldData && (onePais === oldData.pais) ? 'selected' : null %> >
-                        <%= onePais %> </option>
+                <form action="/user/registro" method="POST" class="register" enctype="multipart/form-data">
+                    <legend class="main-titulo-edit">Registro de Usuario</legend>
+
+                    <label class="form-label" for="nombre"></label>
+                    <input type="text" placeholder="Nombre" name="nombre" class="form-control
+                <%= locals.errors && errors.nombre ? 'is-invalid' : null %>"
+                        value="<%= locals.oldData ? oldData.nombre : null %>">
+                    <br>
+                    <% if (locals.errors && errors.nombre) { %>
+                        <div>
+                            <p style="color: red;">
+                                <%= errors.nombre.msg %>
+                            </p>
+                        </div>
                         <% } %>
-                    } 
-                </select>
-              
-                <!-- <label class="form-label" for="pais"> </label>
+
+
+                            <label class="form-label" for="Apellido"></label>
+                            <input type="text" placeholder="Apellido" name="Apellido" class="form-control 
+                <%= locals.errors && errors.Apellido ? 'is-invalid' : null %>"
+                                value="<%= locals.oldData ? oldData.Apellido : null %>">
+                            <br>
+                            <% if (locals.errors && errors.Apellido) { %>
+                                <div>
+                                    <p style="color: red;">
+                                        <%= errors.Apellido.msg %>
+                                    </p>
+                                </div>
+                                <% } %>
+
+                                    <label class="form-label" for="username"></label>
+                                    <!-- <div class="error" id="username-error"></div> -->
+                                    <input type="text" placeholder="Nombre de usuari@" name="username"
+                                        class="form-control <%= locals.errors && errors.username ? 'is-invalid' : null %>"
+                                        value="<%= locals.oldData ? oldData.username : null %>"> <br>
+                                    <% if (locals.errors && errors.username) { %>
+                                        <div>
+                                            <p style="color: red;">
+                                                <%= errors.username.msg %>
+                                            </p>
+                                        </div>
+                                        <% } %>
+                                            <label class="form-label" for="email"></label>
+                                            <input type="email" placeholder="email" name="email"
+                                                class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>"
+                                                value="<%= locals.oldData ? oldData.email : null %>">
+                                            <br>
+                                            <% if (locals.errors && errors.email) { %>
+                                                <div>
+                                                    <p style="color: red;">
+                                                        <%= errors.email.msg %>
+                                                    </p>
+                                                </div>
+                                                <% } %>
+
+                                                    <label class="form-label" for="fecha-nacimiento"></label>
+                                                    <input type="date" placeholder="Fecha de Nacimiento" name="fecha"
+                                                        class="form-control <%= locals.errors && errors.fecha ? 'is-invalid' : null %>"
+                                                        value="<%= locals.oldData ? oldData.fecha : null %>">
+                                                    <br>
+                                                    <% if (locals.errors && errors.fecha) { %>
+                                                        <div>
+                                                            <p style="color: red;">
+                                                                <%= errors.fecha.msg %>
+                                                            </p>
+                                                        </div>
+                                                        <% } %>
+
+                                                            <label class="form-label" for="pais"> </label>
+                                                            <select name="pais"
+                                                                class="form-control <%= locals.errors && errors.pais ? 'is-invalid' : null %>"
+                                                                id="">
+                                                                <option value="">elege un pais</option>
+                                                                <% let paises=[ "Colombia" , "Ecuador" , "Chile"
+                                                                    , "Peru" , "Venezula" ,"Brasil", "Argentina"
+                                                                    , "Mexico" ,"Bolivia","otro"] %>
+                                                                    <% for (const onePais of paises) { %>
+                                                                        <option value="<%= onePais %>" <%=locals.oldData
+                                                                            && (onePais===oldData.pais) ? 'selected' :
+                                                                            null %> >
+                                                                            <%= onePais %>
+                                                                        </option>
+                                                                        <% } %>
+                                                                            }
+                                                            </select>
+
+                                                            <!-- <label class="form-label" for="pais"> </label>
                 <select name="pais" 
                 class="form-control <%= locals.errors && errors.pais ? 'is-invalid' : null %>" >
                     
@@ -149,31 +153,34 @@
                     <option value="Dominican Republic">República Dominicana</option>
                 </select> -->
 
-                <% if (locals.errors && errors.pais) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.pais.msg %></p>
-                    </div>
-                <% } %> 
-                <br>
+                                                            <% if (locals.errors && errors.pais) { %>
+                                                                <div>
+                                                                    <p style="color: red;">
+                                                                        <%= errors.pais.msg %>
+                                                                    </p>
+                                                                </div>
+                                                                <% } %>
+                                                                    <br>
 
-                <label class="form-label" for="genero"> </label>
-                <select 
-                    name="genero" 
-                    class="form-control <%= locals.errors && errors.genero ? 'is-invalid' : null %>"
-                    id="">
-                    <option value="">elege un genero</option>
-                    <% 
-                        let generos = [ "masculino", "femenino", "otro"]
-                    %>
-                    <% for (const oneGenero of generos) { %> 
-                        <option value="<%= oneGenero %>" 
-                        <%= locals.oldData && (oneGenero === oldData.genero) ? 'selected' : null %> >
-                        <%= oneGenero %> </option>
-                        <% } %>
-                    } 
-                </select>
-                
-                <!-- <select name="genero" 
+                                                                    <label class="form-label" for="genero"> </label>
+                                                                    <select name="genero"
+                                                                        class="form-control <%= locals.errors && errors.genero ? 'is-invalid' : null %>"
+                                                                        id="">
+                                                                        <option value="">elege un genero</option>
+                                                                        <% let generos=[ "masculino" , "femenino"
+                                                                            , "otro" ] %>
+                                                                            <% for (const oneGenero of generos) { %>
+                                                                                <option value="<%= oneGenero %>"
+                                                                                    <%=locals.oldData &&
+                                                                                    (oneGenero===oldData.genero)
+                                                                                    ? 'selected' : null %> >
+                                                                                    <%= oneGenero %>
+                                                                                </option>
+                                                                                <% } %>
+                                                                                    }
+                                                                    </select>
+
+                                                                    <!-- <select name="genero" 
                 class="form-control <%= locals.errors && errors.genero ? 'is-invalid' : null %>" 
                 value="<%= locals.oldData ? oldData.genero : null %>"> 
                     <option value="">Selecciona un género</option>
@@ -182,45 +189,75 @@
                     <option value="No-binario">No binario</option>
                     <option value="otro">otro</option>
                 </select> -->
-                <br>
+                                                                    <br>
 
-                <% if (locals.errors && errors.genero) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.genero.msg %></p>
-                    </div>
-                <% } %> 
-        
-                <label class="form-label" for="password"></label>
-                <input type="password" placeholder="Contraseña" 
-                name="password" 
-                class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" 
-                value="<%= locals.oldData ? oldData.password : null %>"> 
-                <br>
-                <% if (locals.errors && errors.password) { %>
-                    <div>
-                        <p style="color: red;"><%= errors.password.msg %></p>
-                    </div>
-                <% } %>
-                <div class="error" id="password-error"></div>
-                <label for="confirm-password"></label>
-                <input type="password" placeholder="Confirmar Contraseña" 
-                name="confirm-password" class="form-control" >
-                <br>
-                
-                <div class="g-recaptcha" data-sitekey="123456789"></div>
-              
-                <div class="button-container submit-edit">
-                    <button type="submit"  class="btn btn-primary">Enviar</button>
-                    <button type="reset" class="btn btn-primary">Borrar</button>
-                </div>
-        
-            </form>
-    
-        </div>
-    </main>
-        
-            <%- include('./../partials/footer') %>     
+                                                                    <% if (locals.errors && errors.genero) { %>
+                                                                        <div>
+                                                                            <p style="color: red;">
+                                                                                <%= errors.genero.msg %>
+                                                                            </p>
+                                                                        </div>
+                                                                        <% } %>
+
+                                                                            <label class="form-label"
+                                                                                for="password"></label>
+                                                                            <input type="password"
+                                                                                placeholder="Contraseña" name="password"
+                                                                                class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>"
+                                                                                value="<%= locals.oldData ? oldData.password : null %>">
+                                                                            <br>
+                                                                            <% if (locals.errors && errors.password) {
+                                                                                %>
+                                                                                <div>
+                                                                                    <p style="color: red;">
+                                                                                        <%= errors.password.msg %>
+                                                                                    </p>
+                                                                                </div>
+                                                                                <% } %>
+                                                                                    <div class="error"
+                                                                                        id="password-error"></div>
+                                                                                    <label
+                                                                                        for="confirm-password"></label>
+                                                                                    <input type="password"
+                                                                                        placeholder="Confirmar Contraseña"
+                                                                                        name="confirm-password"
+                                                                                        class="form-control">
+                                                                                    <br>
+
+                                                                                    <div class="g-recaptcha"
+                                                                                        data-sitekey="123456789">
+                                                                                    </div>
+
+                                                                                    <div class="mb-3 imagen-edit">
+                                                                                        <label for="image"> Seleccionar Imagen </label>
+                                                                                        <input 
+                                                                                        type="file" 
+                                                                                        name="image" 
+                                                                                        class="form-control <%= locals.errors && errors.image ? 'is-invalid' : null %>"
+                                                                                        >
+                                                                                    </div>
+
+                                                                                    <% if (locals.errors && errors.image) {
+                                                                                        %>
+                                                                                        <div>
+                                                                                            <p style="color: red;">
+                                                                                                <%= errors.image.msg %>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <% } %>
+
+                                                                                    <div
+                                                                                        class="button-container submit-edit">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary">Enviar</button>
+                                                                                    </div>
+
+                </form>
+
+            </div>
+        </main>
+
+        <%- include('./../partials/footer') %>
     </body>
-    </html>
 
-
+</html>

@@ -18,6 +18,11 @@ app.use(express.json());
 const methodOverride = require('method-override');
 app.use(methodOverride('_method')); 
 
+// CREAR SESSION DE USUARIO SEGURA
+
+const session = require('express-session');
+app.use(session( {secret: "Nuestro mensaje secreto"}));
+
 
 // SE CREO PARA VISTAS DE PRODUCTOS
 

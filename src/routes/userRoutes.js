@@ -1,7 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const multer = require("multer");
+const path = require("path");
 const { check } = require('express-validator');
 
+var multerDiskStorage = multer.diskStorage({
+    destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
+     cb(null, path.join(__dirname,'../../public/img/imagen_llegada'));    // Ruta donde almacenamos el archivo
+    },
+   
+    filename: function(req, file, cb) {          // request, archivo y callback que almacena archivo en destino
+        let imageName = `${Date.now()}_img${path.extname(file.originalname)}`;   // milisegundos y extensión de archivo original
+        cb(null, imageName);         
+       }
+});
+
+var uploadFile = multer({ storage: multerDiskStorage });
 
 const userController = require('../controller/userController');
 
@@ -50,6 +64,23 @@ const validateRegistro = [
     .notEmpty().withMessage('Debes confirmar el password').bail()
     .isLength({ min: 8 }).withMessage('El password debe tener al menos 8 carateres'),
 
+    check('image')
+    .custom((value, { req }) => {
+        let file = req.file;
+        let acceptedExtensions = [".jpg",".png",".gif"];
+
+        if(!file){
+            throw new Error("tienes que subir una imagen");
+        } else{
+            let fileExtension = path.extname(file.originalname);
+            if (!acceptedExtensions.includes(fileExtension)) {
+                throw new Error(`las extensiones de un archivo permitidas son ${acceptedExtensions.join(", ")}`);
+            }
+        }
+        return true;
+    }
+    
+    )
     ]
 
 
@@ -59,10 +90,7 @@ router.post('/login', validateLogin, userController.postLogin);
 router.get('/perfil', userController.perfil); 
 
 router.get('/registro',  userController.registro); 
-router.post('/registro', validateRegistro, userController.postRegistro); 
-
-
-
+router.post('/registro', uploadFile.single('image'), validateRegistro, userController.postRegistro); 
 
 
 
