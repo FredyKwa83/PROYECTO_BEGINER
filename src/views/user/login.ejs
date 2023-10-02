@@ -13,25 +13,33 @@
    <form action="/user/login" method="POST" id="login">
     <legend class="main-titulo-login">Login</legend>
     <div class="form-prg">
-        <h4 class="login-h4">Nombre de usuario</h4>
-        <input type="text" id="user" name="usernameLogin" placeholder="" class="form-control">
+        <h4 class="login-h4"> Email</h4>
+        <input type="email" id="user" name="email" placeholder="email" class="form-control">
     </div>
-    <% if (locals.errors && errors.usernameLogin) { %>
+    <% if (locals.errors && errors.email) { %>
         <div>
-            <p style="color: red;"><%= errors.usernameLogin.msg %></p>
+            <p style="color: red;"><%= errors.email.msg %></p>
         </div>
     <% } %>
     <div class="form-prg">
         <h4 class="login-h4">Contraseña</h4>
-        <input type="password" id="password" name="passwordLogin" placeholder="" class="form-control">
+        <input type="password" id="password" name="password" placeholder="" class="form-control">
     </div>
-    <% if (locals.errors && errors.passwordLogin) { %>
+    <% if (locals.errors && errors.password) { %>
         <div>
-            <p style="color: red;"><%= errors.passwordLogin.msg %></p>
+            <p style="color: red;"><%= errors.password.msg %></p>
         </div>
     <% } %>
-    <div class="olvide-contraseña">
+    <!-- <div class="olvide-contraseña">
         <a href="#">Olvide mi contraseña</a>
+    </div> -->
+
+    <div class="col-md-6 my-2">
+        <div class="form-group form-check">
+            <label class="form-check-label recordar-user">
+                <input type="checkbox" class="form-check-input " name="remember_user">Recordar mi usuario
+            </label>
+        </div>
     </div>
 
     <div class="smbt mb-3 submit-edit">

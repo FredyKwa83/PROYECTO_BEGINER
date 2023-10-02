@@ -4,6 +4,9 @@ const multer = require("multer");
 const path = require("path");
 const { check } = require('express-validator');
 
+const guestMiddleware = require('../middlewares/guestMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 var multerDiskStorage = multer.diskStorage({
     destination: function(req, file, cb) {       // request, archivo y callback que almacena archivo en destino
      cb(null, path.join(__dirname,'../../public/img/imagen_llegada'));    // Ruta donde almacenamos el archivo
@@ -21,11 +24,11 @@ const userController = require('../controller/userController');
 
 const validateLogin = [ 
     
-check('usernameLogin') 
-.notEmpty().withMessage('Debes completar el usuario').bail()
-.isLength({ min: 5 }).withMessage('El nombre debe tener al menos 5 caracteres'),
+check('email') 
+.notEmpty().withMessage('debes completar el email').bail()
+.isEmail().withMessage('Debes completar un email válido'),
 
- check('passwordLogin')
+ check('password')
  .notEmpty().withMessage('Debes completar el password').bail()
  .isLength({ min: 8 }).withMessage('El password debe tener al menos 8 carateres'),
 
@@ -60,7 +63,7 @@ const validateRegistro = [
     .notEmpty().withMessage('Debes completar el password').bail()
     .isLength({ min: 8 }).withMessage('El password debe tener al menos 8 carateres'),
     
-    check('confirm-password')
+    check('confirmPassword')
     .notEmpty().withMessage('Debes confirmar el password').bail()
     .isLength({ min: 8 }).withMessage('El password debe tener al menos 8 carateres'),
 
@@ -87,11 +90,12 @@ const validateRegistro = [
 router.get('/login', userController.login);
 router.post('/login', validateLogin, userController.postLogin); 
 
-router.get('/perfil', userController.perfil); 
+router.get('/perfil', authMiddleware, userController.perfil); 
 
-router.get('/registro',  userController.registro); 
+router.get('/registro', guestMiddleware, userController.registro); 
 router.post('/registro', uploadFile.single('image'), validateRegistro, userController.postRegistro); 
 
-
+// cerrar sesion
+router.get('/cerrar/', userController.cerrar);
 
 module.exports = router;

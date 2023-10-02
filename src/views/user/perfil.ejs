@@ -9,10 +9,11 @@
             <%- include('./../partials/header') %>
         </header>
         
-   <h1 class = "titulo-h1-createProducts"> AQUI ES EL PERFIL DE USUARIO </h1> 
+   <h2 class = "titulo-h1-createProducts"> PERFIL DE USUARIO <%= user.username %></h2> 
 
         <main class="main-edit">
-           
+           <img class="img-perfil" src=/img/imagen_perfil/<%= user.image %> alt="">
+           <div class="alert alert-success"><%= user.email %> </div>
         </main>
         
             <%- include('./../partials/footer') %>     

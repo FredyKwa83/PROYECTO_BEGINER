@@ -1,0 +1,41 @@
+[
+ {
+  "id": 1,
+  "nombre": "fredy",
+  "Apellido": "cagua",
+  "username": "fredykwa",
+  "email": "profekwa@gmail.com",
+  "fecha": "2023-09-21",
+  "pais": "Colombia",
+  "genero": "masculino",
+  "password": "$2a$10$CA17ynre3KiFwtriRNsCkOx9smaVXECBUfldxlLosCKzkCEz8ucj.",
+  "confirmPassword": "$2a$10$aUoIZUc5UNe3opnh2cKLsuWRZOmLpAlNgBeew3WhweK36nVFByTmq",
+  "image": "1696089681832_img.png"
+ },
+ {
+  "id": 2,
+  "nombre": "lufy",
+  "Apellido": "monkey",
+  "username": "sombreroDePaja",
+  "email": "fredykwita@gmail.com",
+  "fecha": "2023-10-12",
+  "pais": "Colombia",
+  "genero": "masculino",
+  "password": "$2a$10$iQfKQW6NGehPKZaQQ2eT7.IogjWCw6yVWKQGfuiGz/FvhKmJvkETm",
+  "confirmPassword": "$2a$10$2VPc9diYz.HxDn.k/iwuyuNGDNyu3czlzrz0nK0NmvQdps/nfEvcS",
+  "image": "1696202750850_img.PNG"
+ },
+ {
+  "id": 3,
+  "nombre": "lufy",
+  "Apellido": "monkey",
+  "username": "sombreroDePaja",
+  "email": "andreskwita@gmail.com",
+  "fecha": "2023-10-12",
+  "pais": "Colombia",
+  "genero": "masculino",
+  "password": "$2a$10$EK4F9hJ12x.6/7/6xZlXYul2oeSN6JoSjKX09vyOQa/j7sVGBfQ5i",
+  "confirmPassword": "$2a$10$gbkbq4/A8nIbhqGxMFkzTeExmYRylFBftIAU3uTvJsa/jRVy2qRqS",
+  "image": "1696202905818_img.png"
+ }
+]
