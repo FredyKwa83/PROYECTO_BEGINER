@@ -55,7 +55,7 @@ const userController = {
 		})},
     
     registro: (req, res) => {
-        res.cookies("testing", "hola mundo", {maxAge: 1000 * 30})
+        res.cookie("testing", "hola mundo", {maxAge: 1000 * 30})
         res.render('./user/registro')
     },
 
